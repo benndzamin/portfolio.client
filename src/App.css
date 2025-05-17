@@ -10,3 +10,8 @@
   background-repeat: no-repeat;
   -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%);
 }
+
+#bigname {
+  font-family: 'Poppins';
+  font-weight: 900;
+}

@@ -1,70 +1,80 @@
 import { useEffect, useState } from 'react'
 
+interface NavItem {
+  id: string
+  label: string
+}
+
+const navItems: NavItem[] = [
+  { id: 'home', label: 'home' },
+  { id: 'expertise',    label: 'expertise' },
+  { id: 'work',         label: 'work' },
+  { id: 'experience',   label: 'experience' },
+  { id: 'contact',      label: 'contact' },
+]
+
 const Navbar = () => {
-  const [showSticky, setShowSticky] = useState(false)
+  const [showSticky, setShowSticky]   = useState(false)
   const [activeHover, setActiveHover] = useState<string | null>(null)
 
+  /*  ─── show / hide sticky bar on scroll ─────────────────────────── */
   useEffect(() => {
-    const handleScroll = () => {
-      setShowSticky(window.scrollY > 200)
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setShowSticky(window.scrollY > 200)
+    window.addEventListener('scroll', onScroll)
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const navItems = [
-    { id: 'projects', label: 'Home' },
-    { id: 'expertise', label: 'Expertise' },
-    { id: 'work', label: 'Work' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'contact', label: 'Contact' },
-  ]
+/*  ─── helper: smooth-scroll + no hash in URL ───────────────────── */
+  const scrollTo = (id: string) => (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    const el = document.getElementById(id)
+    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
 
-  const renderNavItems = () => (
-    <ul className="flex space-x-6">
-      {navItems.map(({ id, label }) => (
-        <li
-          key={id}
-          onMouseEnter={() => setActiveHover(id)}
-          onMouseLeave={() => setActiveHover(null)}
-          className={`
-            transition duration-400
-            ${activeHover && activeHover !== id ? 'opacity-50' : 'opacity-100'}
-          `}
+  /*  ─── nav list ─────────────────────────────────────────────────── */
+const renderNavItems = () => (
+  <ul className="flex space-x-6 select-none">
+    {navItems.map(({ id, label }, idx) => (
+      <li
+        key={id}
+        onMouseEnter={() => setActiveHover(id)}
+        onMouseLeave={() => setActiveHover(null)}
+        className={`relative transition duration-200 cursor-pointer
+          ${activeHover && activeHover !== id ? 'opacity-40' : 'opacity-100'}
+        `}
+      >
+        <a
+          onClick={scrollTo(id)}
+          className="flex flex-col items-start text-white lowercase font-mono text-shadow-sm hover:text-white/80"
         >
-          <a
-            href={`#${id}`}
-            className="text-white text-shadow-sm hover:opacity-100 hover:text-cyan-800 transition font-medium"
-          >
-            {label}
-          </a>
-        </li>
-      ))}
-    </ul>
-  )
+          {/* Broj gore desno, bliže tekstu */}
+          <span className="absolute -top-2 right-0 text-xs text-white drop-shadow-sm">
+            {idx < 9 ? `0${idx}` : idx}
+          </span>
+
+          {/* Label ispod */}
+          <span className="drop-shadow-md">// {label.replace('// ', '')}</span>
+        </a>
+      </li>
+    ))}
+  </ul>
+)
 
   return (
     <>
-      {/* Glavni navbar */}
-      <nav className="top-0 left-0 w-full z-40 bg-transparent text-white p-5">
-        <div className="container mx-auto flex flex-col sm:flex-row justify-center md:justify-between items-center gap-2">
-          <h1 className="text-2xl font-bold hidden md:block">Benjamin Mujkić</h1>
+      {/* normalna traka */}
+      <nav className="w-full z-40 bg-transparent text-white p-5">
+        <div className="mx-auto container flex flex-col md:flex-row items-center justify-center md:justify-between gap-2">
+          <h1 className="hidden md:block text-2xl font-bold font-sans">Benjamin Mujkić</h1>
           {renderNavItems()}
         </div>
       </nav>
 
-      {/* Sticky navbar */}
-      <nav
-        className={`
-          fixed top-0 left-0 w-full z-50 bg-black/20 backdrop-blur-md text-white p-4 shadow-md
-          transition-opacity duration-500
-          ${showSticky ? 'opacity-100' : 'opacity-0 pointer-events-none'}
-        `}
-      >
-        <div className="container mx-auto flex justify-center">
-          {renderNavItems()}
-        </div>
+      {/* sticky traka */}
+      <nav className={`fixed top-0 left-0 w-full z-50 bg-black/20 backdrop-blur
+                       transition-opacity duration-500
+                       ${showSticky ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+        <div className="mx-auto container flex justify-center py-3">{renderNavItems()}</div>
       </nav>
     </>
   )

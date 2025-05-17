@@ -10,6 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource/poppins": "^5.2.6",
+    "@fontsource/roboto-mono": "^5.2.5",
     "motion": "^12.10.5",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
