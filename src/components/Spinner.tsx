@@ -1,5 +1,5 @@
-"use client"
-import { motion } from "framer-motion"
+"use client";
+import { motion } from "framer-motion";
 
 function Spinner() {
   return (
@@ -32,7 +32,7 @@ function Spinner() {
         }
       `}</style>
     </div>
-  )
+  );
 }
 
-export default Spinner
+export default Spinner;

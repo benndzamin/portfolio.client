@@ -3,15 +3,22 @@
   margin: 0 auto;
   text-align: center;
 }
-#background{
-  background-image: url('/bg-photo-listing.jpg');
+#background {
+  background-image: url("/bg-photo-listing.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  -webkit-mask-image: linear-gradient(to top, transparent 0%, black 20%, black 80%, transparent 100%);
+  mask-image: url("/grain.png");
+  -webkit-mask-image: linear-gradient(
+    to top,
+    transparent 0%,
+    black 20%,
+    black 80%,
+    transparent 100%
+  );
 }
 
 #bigname {
-  font-family: 'Poppins';
+  font-family: "Poppins";
   font-weight: 900;
 }
