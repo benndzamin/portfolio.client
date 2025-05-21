@@ -68,9 +68,9 @@ const Navbar = () => {
     <>
       {/* Top bar (transparent) */}
       <nav className="w-full z-40 bg-transparent text-white p-5">
-        <div className="mx-auto container flex items-center justify-between">
+        <div className="mx-auto container flex items-center lg:justify-between md:justify-center">
           {/* Logo / ime */}
-          <h1 className="text-2xl font-bold font-mono text-nowrap">
+          <h1 className="text-2xl font-bold font-mono text-nowrap hidden lg:block">
             Benjamin Mujkić
           </h1>
 
@@ -79,7 +79,7 @@ const Navbar = () => {
 
           {/* Hamburger dugme (samo mobilno) */}
           <button
-            className="md:hidden text-white focus:outline-none bg-transparent border-x-white hover:border-y-white hover:border-x-transparent"
+            className="md:hidden text-white focus:outline-none bg-transparent border-x-white hover:border-y-white hover:border-x-transparent ml-auto"
             onClick={() => setMobileOpen(true)}
           >
             <svg

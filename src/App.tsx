@@ -53,12 +53,11 @@ function App() {
           </motion.div>
           <div
             id="background"
-            className="scroll-mb-40 relative bg-cover bg-center overflow-hidden h-[90vh]"
+            className="background-section grain-overlay scroll-mb-40 relative bg-cover bg-center overflow-hidden h-[90vh] mb-80"
           >
             <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center px-4">
               <motion.h1
-                id="bigname"
-                className="text-[9vw] font-bold text-white"
+                className="text-[9vw] font-sans md:text-[6vw] lg:text-[7vw] text-white z-10"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.8 }}
@@ -66,7 +65,7 @@ function App() {
                 BENJAMIN MUJKIĆ
               </motion.h1>
               <motion.p
-                className="text-[3vw] text-gray-200"
+                className="text-[2.5vw] md:text-[2vw] lg:text-[2vw] text-gray-200 mb-52 md:mb-24 lg:mb-20 z-10"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
                 transition={{ duration: 0.8, delay: 1.2 }}
