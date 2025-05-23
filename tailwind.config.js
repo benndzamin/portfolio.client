@@ -6,6 +6,10 @@ module.exports = {
       fontFamily: {
         sans: ['"Poppins"', "sans-serif"],
         mono: ['"Roboto Mono"', "monospace"],
+        backgroundImage: {
+          "radial-fade":
+            "radial-gradient(circle, rgba(30,41,59,1) 0%, rgba(15,23,42,1) 80%)",
+        },
       },
     },
   },

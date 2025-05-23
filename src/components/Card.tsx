@@ -11,7 +11,7 @@ const Card = ({ children }: CardProps) => {
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 
-                 rounded-2xl shadow-lg p-6 my-6 mx-auto max-w-3xl"
+                 rounded-2xl shadow-lg p-6 my-6 mx-auto max-w-3xl mb-40"
     >
       {children}
     </motion.div>

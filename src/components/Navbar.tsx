@@ -34,7 +34,7 @@ const Navbar = () => {
 
   /* ── desktop nav list ──────────────────────────────────────────── */
   const renderNavItems = () => (
-    <ul className="hidden md:flex space-x-6 select-none">
+    <ul className="hidden md:flex select-none">
       {navItems.map(({ id, label }, idx) => (
         <li
           key={id}
@@ -49,9 +49,9 @@ const Navbar = () => {
         >
           <a
             onClick={scrollTo(id)}
-            className="flex flex-col items-start text-white lowercase font-mono text-shadow-sm hover:text-white/80"
+            className="flex flex-col items-start text-white lowercase font-mono text-shadow-sm hover:text-white/80 px-5"
           >
-            <span className="absolute -top-2 right-0 text-xs text-white drop-shadow-sm">
+            <span className="absolute -top-2.5 right-0 text-[0.6rem] text-white drop-shadow-sm px-5">
               {`0${idx + 1}`}
             </span>
             <span className="drop-shadow-md  before:content-['//'] sm:before:content-[''] md:before:content-['//'] before:mr-2">
