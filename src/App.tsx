@@ -7,6 +7,7 @@ import Spinner from "./components/Spinner";
 import FadeInOnScroll from "./components/FadeInOnScroll";
 import { motion, AnimatePresence } from "framer-motion";
 import Chat from "./components/Chat";
+import ExpertiseSection from "./components/ExpertiseSection";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -58,7 +59,7 @@ function App() {
 
           <div
             id="background"
-            className="background-section grain-overlay scroll-mb-40 relative bg-cover bg-center overflow-hidden h-[90vh] mb-40"
+            className="background-section grain-overlay scroll-mb-40 relative bg-cover bg-center overflow-hidden h-[90vh] mb-10"
           >
             <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center px-4">
               <motion.h1
@@ -81,9 +82,7 @@ function App() {
           </div>
 
           <FadeInOnScroll delay={0.3}>
-            <div className="mb-10 text-center">
-              <h1 className="text-3xl text-white font-bold">My expertise</h1>
-            </div>
+            <ExpertiseSection />
           </FadeInOnScroll>
 
           <FadeInOnScroll delay={0.3}>
@@ -101,7 +100,7 @@ function App() {
             </Card>
           </FadeInOnScroll>
 
-          <FadeInOnScroll delay={0.4}>
+          <FadeInOnScroll delay={0.3}>
             <ContactMe />
           </FadeInOnScroll>
         </motion.main>

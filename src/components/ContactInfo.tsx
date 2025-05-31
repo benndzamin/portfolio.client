@@ -64,9 +64,7 @@ const ContactInfo = () => {
             href={item.href}
             target={item.href.startsWith("http") ? "_blank" : undefined}
             rel="noopener noreferrer"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: index * 0.2 + 0.2 }}
+            title={item.tooltip}
             className="text-white/90 hover:text-white underline-offset-4 hover:underline transition-all text-sm sm:text-base text-left"
           >
             {item.label}
