@@ -14,6 +14,7 @@ const ContactMe = () => {
     setLoading(true);
     setError(null);
 
+    // formspree endpoint
     const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeeddypg";
 
     try {
@@ -34,7 +35,7 @@ const ContactMe = () => {
         setEmail("");
         setMessage("");
 
-        // Dugme se vraća u normalu nakon 5 sekundi
+        // button restoring after 5 seconds
         setTimeout(() => setSubmitted(false), 5000);
       } else {
         throw new Error("Pukla veza sa serverom. Pokušaj ponovo.");
@@ -49,35 +50,33 @@ const ContactMe = () => {
   return (
     <section
       id="contact"
-      className="w-full bg-[radial-gradient(circle,_rgba(30,41,59,1)_0%,_rgba(15,23,42,1)_80%)] text-white py-16 px-4"
+      className="py-16 px-4 text-center bg-[radial-gradient(circle,_rgba(30,41,59,1)_0%,_rgba(15,23,42,1)_80%)] text-white py-16 px-4"
     >
       <div className="max-w-4xl mx-auto">
         <p className="text-sm tracking-[0.4em] text-cyan-400">
           02 // contact me
         </p>
-        {/* Pozivni tekst */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center">
+        <h2 className="mt-2 text-4xl font-semibold tracking-tight text-white font-mono">
           Let's connect and create something meaningful
         </h2>
-        <div className="mt-3 h-[2px] w-12 bg-cyan-500 mx-auto rounded mb-10"></div>
-        <p className="text-center text-gray-400 mb-10 max-w-xl mx-auto">
+        <div className="mt-3 h-[2px] w-12 bg-cyan-500 mx-auto rounded"></div>
+        <p className="text-center text-gray-400 mt-10 max-w-xl mx-auto">
           Whether you have a project in mind, a job opportunity, or just want to
-          say hi — feel free to get in touch. You can reach out through any
-          platform below, or send a message directly. I’ll respond as soon as I
-          can.
+          say hi — feel free to get in touch. You can reach out through any of
+          the platforms below, or use the contact form.
         </p>
 
-        {/* Kontakt detalji */}
+        {/* contact details */}
         <FadeInOnScroll delay={0.3}>
           <ContactInfo />
         </FadeInOnScroll>
 
         <p className="text-center text-gray-400 mb-10 max-w-xl mx-auto">
-          Prefer typing? Just drop me a message here — I’ll get back to you
+          Prefer typing? Drop me a message right here and I’ll get back to you
           shortly.
         </p>
 
-        {/* Forma */}
+        {/* Form */}
         <form onSubmit={handleSubmit} className="max-w-2xl mx-auto space-y-6">
           <input
             type="email"
@@ -98,7 +97,7 @@ const ContactMe = () => {
             className="w-full bg-gray-900 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 resize-none disabled:opacity-50"
           />
 
-          {/* Ispis greške ako nešto krene po zlu */}
+          {/* Error printing if something is not working! */}
           {error && (
             <p className="text-red-500 text-sm text-center font-medium animate-pulse">
               {error}
