@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./components/Navbarr";
-import Card from "./components/Card";
 import ContactMe from "./components/ContactMe";
 import Spinner from "./components/Spinner";
 import FadeInOnScroll from "./components/FadeInOnScroll";
 import { motion, AnimatePresence } from "framer-motion";
 import Chat from "./components/Chat";
 import ExpertiseSection from "./components/ExpertiseSection";
+import WorkSection from "./components/WorkSection";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -52,7 +52,7 @@ function App() {
           <motion.div
             initial={{ y: -50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.2 }}
+            transition={{ duration: 0.8, delay: 1.5 }}
           >
             <Navbar />
           </motion.div>
@@ -61,20 +61,39 @@ function App() {
             id="background"
             className="background-section grain-overlay scroll-mb-40 relative bg-cover bg-center overflow-hidden h-[90vh] mb-10"
           >
+            <motion.div
+              initial={{ y: -50, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 2, delay: 2 }}
+            >
+              <video
+                src="/code-glitch2.mp4"
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="video-code-overlay"
+              />
+            </motion.div>
             <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center text-center px-4">
               <motion.h1
-                className="text-[9vw] font-sans md:text-[6vw] lg:text-[7vw] text-white z-10"
+                className="inline-flex flex-wrap items-end justify-center gap-4 text-[10vw] md:text-[8vw] lg:text-[7vw] font-sans tracking-tight leading-none text-red-600 z-10"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1, delay: 0.8 }}
               >
-                BENJAMIN MUJKIĆ
+                <span className="whitespace-nowrap text-[1.4em] md:text-[1.25em] lg:text-[1.15em]">
+                  Hi,
+                </span>
+                <span className="whitespace-nowrap text-[0.55em] md:text-[0.65em] lg:text-[0.7em] text-white">
+                  I&apos;m Benjamin
+                </span>
               </motion.h1>
               <motion.p
-                className="text-[2.5vw] md:text-[2vw] lg:text-[2vw] text-gray-200 mb-52 md:mb-24 lg:mb-20 z-10"
+                className="text-[2vw] md:text-[1.8vw] lg:text-[1.6vw] text-gray-200 mb-52 md:mb-24 lg:mb-20 z-10"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 1.2 }}
+                transition={{ duration: 0.8, delay: 1.5 }}
               >
                 Software Engineer, Full-stack Developer.
               </motion.p>
@@ -86,18 +105,7 @@ function App() {
           </FadeInOnScroll>
 
           <FadeInOnScroll delay={0.3}>
-            <Card>
-              <h1 className="text-xl font-semibold text-white mb-2">
-                Paragraf
-              </h1>
-              <p className="text-gray-300">
-                Ovo je neki tekst sadržaj... Lorem ipsum dolor sit amet
-                consectetur, adipisicing elit. Asperiores soluta fugiat
-                veritatis, velit cumque sapiente impedit perferendis expedita
-                fuga nihil officia tempore vitae molestias enim tempora
-                consectetur, ducimus excepturi rem.
-              </p>
-            </Card>
+            <WorkSection />
           </FadeInOnScroll>
 
           <FadeInOnScroll delay={0.3}>

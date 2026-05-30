@@ -52,7 +52,7 @@ const Chat = () => {
         await fetch(BACKEND_URL, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ poruka: "" }),
+          body: JSON.stringify({ poruka: "ping" }),
         });
       } catch (e) {
         // Quietly ignore errors as this is just a background wake-up ping

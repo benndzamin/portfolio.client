@@ -1,68 +1,41 @@
-#root {
-  width: 100%;
-  margin: 0 auto;
-  text-align: center;
-}
 #background {
-  background-image: url("/bg-photo-listing.jpg");
+  position: relative;
+  overflow: hidden;
+  height: 90vh;
+  background-color: #020617;
+
+  /* Slika grada je ponovo tu, čista i svijetla */
+  background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, #020617 100%),
+    url("/bgimg.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  text-shadow: 5px 5px 4px rgba(0, 0, 0, 0.5);
-  -webkit-mask-image: linear-gradient(
-    to top,
-    transparent 0%,
-    black 20%,
-    black 80%,
-    transparent 100%
-  );
 }
 
-.grain-overlay::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("/grain.png");
-  background-size: 10%;
-  background-repeat: repeat;
-  opacity: 0.5;
-  pointer-events: none;
-  z-index: 50;
-  animation: grainTV 0.25s steps(1) infinite;
+/* POZICIONIRANJE I FILTRIRANJE VIDEA */
+.video-code-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Širi video preko cijele pozadine bez distorzije */
+  pointer-events: none; /* Miš prolazi kroz video normalno */
+  z-index: 2; /* Ispred grada, iza teksta */
+
+  /* KLJUČNI TRIK: Brišemo crnu pozadinu iz mp4 videa, ostaju samo glitch linije */
+  mix-blend-mode: hard-light;
+
+  /* Pošto je video "u oštrom fokusu", sa ovim ga malo prigušujemo da ne pojede tekst */
+  opacity: 0.13;
+
+  /* Opcionalno: Ako želiš da linije budu još sitnije preko ekrana, 
+     možeš otkomentarisati scale liniju ispod da ga malo raširiš */
+  /* transform: scale(1.1); */
 }
 
-@keyframes grainTV {
-  0% {
-    transform: translate(0px, 0px);
-  }
-  10% {
-    transform: translate(-5px, -3px);
-  }
-  20% {
-    transform: translate(3px, 2px);
-  }
-  30% {
-    transform: translate(-2px, 5px);
-  }
-  40% {
-    transform: translate(4px, -4px);
-  }
-  50% {
-    transform: translate(-3px, 3px);
-  }
-  60% {
-    transform: translate(2px, -5px);
-  }
-  70% {
-    transform: translate(-4px, 2px);
-  }
-  80% {
-    transform: translate(1px, -3px);
-  }
-  90% {
-    transform: translate(-2px, 1px);
-  }
-  100% {
-    transform: translate(0px, 0px);
-  }
+/* Da budemo sigurni da tekst iskače ispred videa */
+.z-10 {
+  z-index: 10 !important;
 }

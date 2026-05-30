@@ -6,9 +6,11 @@ import { TbLayoutDashboard, TbStack2 } from "react-icons/tb";
 const ExpertiseSection = () => {
   return (
     <section className="py-16 px-4 text-center" id="expertise">
-      <h2 className="text-6xl font-bold text-white mb-10 mt-8 drop-shadow">
-        My Expertise
-      </h2>
+      <div className="mb-16 text-center">
+          <p className="text-sm tracking-[0.4em] text-cyan-400">02 // my expertise</p>
+          <h2 className="mt-2 text-4xl font-semibold tracking-tight text-white font-mono">Technical Skills</h2>
+          <div className="mt-3 h-[2px] w-12 bg-cyan-500 mx-auto rounded"></div>
+        </div>
 
       <div className="flex flex-wrap justify-center">
         <ExpertiseCard

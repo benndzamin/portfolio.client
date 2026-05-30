@@ -3,15 +3,15 @@ import { motion } from "framer-motion";
 
 interface CardProps {
   children: ReactNode;
+  className?: string;
 }
 
-const Card = ({ children }: CardProps) => {
+const Card = ({ children, className = "" }: CardProps) => {
   return (
     <motion.div
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.95 }}
-      className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-100 
-                 rounded-2xl shadow-lg p-6 my-6 mx-auto max-w-3xl mb-40"
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.3, ease: "easeOut" }}
+      className={`relative overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50 backdrop-blur-sm shadow-xl ${className}`}
     >
       {children}
     </motion.div>

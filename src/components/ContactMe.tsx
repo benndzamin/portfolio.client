@@ -6,16 +6,44 @@ const ContactMe = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false); // [DODANO] Stanje dok se mail šalje
+  const [error, setError] = useState<string | null>(null); // [DODANO] Stanje za grešku
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
+    setError(null);
 
-    // Ovde možeš dodati integraciju sa email servisom (EmailJS, Formspree, slanje na server itd.)
-    console.log({ email, message });
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeeddypg";
 
-    setSubmitted(true);
-    setEmail("");
-    setMessage("");
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          message: message,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        setEmail("");
+        setMessage("");
+
+        // Dugme se vraća u normalu nakon 5 sekundi
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        throw new Error("Pukla veza sa serverom. Pokušaj ponovo.");
+      }
+    } catch (err: any) {
+      setError(err.message || "Slanje poruke nije uspjelo.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -24,10 +52,14 @@ const ContactMe = () => {
       className="w-full bg-[radial-gradient(circle,_rgba(30,41,59,1)_0%,_rgba(15,23,42,1)_80%)] text-white py-16 px-4"
     >
       <div className="max-w-4xl mx-auto">
+        <p className="text-sm tracking-[0.4em] text-cyan-400">
+          02 // contact me
+        </p>
         {/* Pozivni tekst */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center">
+        <h2 className="text-3xl md:text-4xl font-bold text-center">
           Let's connect and create something meaningful
         </h2>
+        <div className="mt-3 h-[2px] w-12 bg-cyan-500 mx-auto rounded mb-10"></div>
         <p className="text-center text-gray-400 mb-10 max-w-xl mx-auto">
           Whether you have a project in mind, a job opportunity, or just want to
           say hi — feel free to get in touch. You can reach out through any
@@ -50,24 +82,43 @@ const ContactMe = () => {
           <input
             type="email"
             required
+            disabled={loading || submitted}
             placeholder="Your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className="w-full bg-gray-900 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500"
+            className="w-full bg-gray-900 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50"
           />
           <textarea
             required
+            disabled={loading || submitted}
             placeholder="Your message"
             rows={6}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="w-full bg-gray-900 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+            className="w-full bg-gray-900 text-white p-3 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 resize-none disabled:opacity-50"
           />
+
+          {/* Ispis greške ako nešto krene po zlu */}
+          {error && (
+            <p className="text-red-500 text-sm text-center font-medium animate-pulse">
+              {error}
+            </p>
+          )}
+
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 transition text-white font-semibold py-3 rounded-lg"
+            disabled={loading || submitted}
+            className={`w-full transition text-white font-semibold p-3 rounded-lg ${
+              submitted
+                ? "bg-green-600 hover:bg-green-700"
+                : "bg-blue-600 hover:bg-blue-700 disabled:bg-gray-700"
+            }`}
           >
-            {submitted ? "Thanks, I’ll be in touch!" : "Send Message"}
+            {loading
+              ? "Sending..."
+              : submitted
+                ? "Message sent! I’ll get back to you soon."
+                : "Send Message"}
           </button>
         </form>
       </div>
