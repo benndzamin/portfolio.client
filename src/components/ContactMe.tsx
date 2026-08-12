@@ -54,7 +54,7 @@ const ContactMe = () => {
     >
       <div className="max-w-4xl mx-auto">
         <p className="text-sm tracking-[0.4em] text-cyan-400">
-          02 // contact me
+          04 // contact me
         </p>
         <h2 className="mt-2 text-4xl font-semibold tracking-tight text-white font-mono">
           Let's connect and create something meaningful
