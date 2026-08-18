@@ -206,6 +206,8 @@ const WorkSection: React.FC = () => {
                 <img
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
+                  decoding="async"
                   className="h-full w-full object-cover transition-transform duration-500 ease-out"
                   style={{
                     transform:

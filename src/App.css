@@ -2,15 +2,9 @@
   position: relative;
   overflow: hidden;
   height: 90vh;
+  /* Ovo je odmah vidljivo pri prvom paint-u, prije nego što se bgimg.png uopšte učita.
+     Slika grada se sada fejduje in preko motion.div-a u App.tsx, ne ovdje. */
   background-color: #020617;
-
-  /* Slika grada je ponovo tu, čista i svijetla */
-  background-image:
-    linear-gradient(to bottom, rgba(0, 0, 0, 0) 70%, #020617 100%),
-    url("/bgimg.png");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
 }
 
 /* POZICIONIRANJE I FILTRIRANJE VIDEA */
