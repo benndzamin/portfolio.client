@@ -41,21 +41,29 @@ function App() {
           id="background"
           className="background-section grain-overlay scroll-mb-40 relative bg-cover bg-center overflow-hidden h-[90vh] mb-10"
         >
-          {/* Slika grada fejduje in tek kad se stvarno učita - nema više "popping in" */}
+          {/* Slika grada fejduje in tek kad se stvarno učita - nema više "popping in".
+              Unutra su i dva "glitch slice" sloja - povremeno, kratko odsijeku i
+              pomjere komad slike sa RGB fringe efektom, isti vibe kao video overlay. */}
           <motion.div
             className="absolute inset-0"
-            style={{
-              zIndex: 0,
-              backgroundImage:
-                'linear-gradient(to bottom, rgba(0,0,0,0) 70%, #020617 100%), url("/bgimg.png")',
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
+            style={{ zIndex: 0 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: bgLoaded ? 1 : 0 }}
             transition={{ duration: 1 }}
-          />
+          >
+            <div
+              className="absolute inset-0"
+              style={{
+                backgroundImage:
+                  'linear-gradient(to bottom, rgba(0,0,0,0) 70%, #020617 100%), url("/bgimg.png")',
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }}
+            />
+            <div className="bg-glitch-slice bg-glitch-cyan" />
+            <div className="bg-glitch-slice bg-glitch-red" />
+          </motion.div>
 
           <motion.div
             className="absolute inset-0"

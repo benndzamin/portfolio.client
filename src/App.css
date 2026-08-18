@@ -33,3 +33,87 @@
 .z-10 {
   z-index: 10 !important;
 }
+
+/* GLITCH EFEKAT NA POZADINSKOJ SLICI
+   Dva sloja iste slike, obojena u cyan/crvenu (hue-rotate trik) i blendana
+   sa "screen", koja su normalno nevidljiva. Keyframe animacija ih povremeno,
+   na djelić sekunde, upali sa clip-path isječkom i malim pomjerajem - klasičan
+   RGB-split "slice" glitch. Dva sloja imaju različitu dužinu animacije da se
+   ne ponavljaju u istom ritmu. */
+.bg-glitch-slice {
+  position: absolute;
+  inset: 0;
+  background-image: url("/bgimg.png");
+  background-size: cover;
+  background-position: center;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  opacity: 0;
+  will-change: transform, clip-path, opacity;
+}
+
+.bg-glitch-cyan {
+  filter: brightness(1.3) sepia(1) hue-rotate(150deg) saturate(6);
+  animation: bgGlitchCyan 7s infinite;
+}
+
+.bg-glitch-red {
+  filter: brightness(1.1) sepia(1) hue-rotate(-50deg) saturate(6);
+  animation: bgGlitchRed 5.3s infinite;
+}
+
+@keyframes bgGlitchCyan {
+  0%,
+  95%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+  95.5% {
+    opacity: 0.35;
+    clip-path: inset(20% 0 55% 0);
+    transform: translate(6px, 0);
+  }
+  96.2% {
+    opacity: 0.3;
+    clip-path: inset(55% 0 15% 0);
+    transform: translate(-4px, 0);
+  }
+  97% {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes bgGlitchRed {
+  0%,
+  96%,
+  100% {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+  96.4% {
+    opacity: 0.3;
+    clip-path: inset(10% 0 70% 0);
+    transform: translate(-5px, 0);
+  }
+  97.1% {
+    opacity: 0.28;
+    clip-path: inset(65% 0 8% 0);
+    transform: translate(4px, 0);
+  }
+  98% {
+    opacity: 0;
+    clip-path: inset(0 0 0 0);
+    transform: translate(0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-glitch-slice {
+    animation: none !important;
+  }
+}
